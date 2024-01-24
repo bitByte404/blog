@@ -1,11 +1,48 @@
-doctype
-html(lang=config.language)
-  include ./partial/header-base.pug
-  body
-    include ./partial/header.pug
-    main
-      section.main-content !{ body }
-    include ./partial/footer.pug
-    script(src=url_for('scripts/dark.js'))
-    if is_post()
-      script(src=url_for('scripts/post.js'))
+.layout {
+  display: flex;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  max-width: 1200px;
+maxWidth768()
+}
+.layout#content-inner {
+  max-width: 1400px;
+}
+.hide-aside.layout {
+  max-width: 1400px;
+}
+.hide-aside.layout > div {
+  width: 100% !important;
+}
+.layout > div:first-child {
+  width: calc(100% - 300px);
+maxWidth1200()
+}
+.layout > div:first-child:not(.recent-posts) {
+  box-shadow: var(--sco-shadow-border);
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  width: calc(100% - 300px);
+  background: var(--sco-card-bg);
+  border: var(--style-border);
+  align-self: flex-start;
+  animation: slide-in 0.6s 0.1s backwards;
+  position: relative;
+  overflow: hidden;
+maxWidth768()
+}
+span.tags-punctuation::before {
+  content: "\e071";
+  font-family: scoicon, serif !important;
+  font-size: 12px;
+  margin-right: 2px;
+  opacity: 0.4;
+}
+.hide-aside #page span.tags-punctuation::before {
+  font-size: 16px;
+}
+#post-info span.tags-punctuation::before {
+  font-size: 14px;
+  line-height: 32px;
+}
+<script>const posts=["2024/01/20/hello-world/"];function toRandomPost(){ pjax.loadUrl('/'+posts[Math.floor(Math.random()*posts.length)]); };</script>
